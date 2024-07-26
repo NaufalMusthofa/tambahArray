@@ -40,10 +40,13 @@ const tambahMhs = (namaMhs, nimMhs, addName, addNim) => {
         nimMhs = parseInt(prompt(`======= Mahasiswa ======\n\nNama : ${namaMhs}\nMasukan Nim Anda`));
         
         // memeriksa nama / nim sudah terdaftar
+        let isRegisteredOne = false;
         for (let x = 0; x < dataMhs.length; x++){
             // kondisi ketika salah satu ada yg kosong
             if (!namaMhs || !nimMhs){
-                return `Harap masukan nama/nim mahasiswa nya, dan salah satu tidak boleh kosong!`;
+                alert(`Harap masukan nama/nim mahasiswa nya, dan salah satu tidak boleh kosong!`);
+                isRegisteredOne = true;
+                break;
             }
 
             // kondisi ketika terdapat nilai undefined dan nama/nim yang sama
@@ -51,12 +54,14 @@ const tambahMhs = (namaMhs, nimMhs, addName, addNim) => {
                 dataMhs[x] = {nama: namaMhs, nim: nimMhs};
                 return `nilai undefined berhasil ditambahkan mahasiswa baru!`;
             }
+
+            // tambah array di awal
+            if (!isRegisteredOne){
+                dataMhs.push({nama: namaMhs, nim: nimMhs});
+                document.write(`<br><br>${number+1}.) ${namaMhs}____ ${nimMhs}<br>`);
+            }
         }
     }
-
-    // tambah
-    dataMhs.push({nama: namaMhs, nim: nimMhs});
-    document.write(`<br><br>${number+1}.) ${namaMhs}____ ${nimMhs}<br>`);
 
     // add nama/nim baru
     let ulang = true;

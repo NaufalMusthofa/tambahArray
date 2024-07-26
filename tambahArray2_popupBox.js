@@ -3,42 +3,20 @@ const admin = ['Muhammad Naufal Musthofa'];
 
 const tambahMhs = (namaMhs, nimMhs, addName, addNim) => {
     let number = dataMhs.length;
-    if (dataMhs !== -1){
-        namaMhs = prompt(`Masukan Nama Anda`);
-        nimMhs = parseInt(prompt(`======= Mahasiswa ======\n\nNama : ${namaMhs}\nMasukan Nim Anda`));
-        
-        // memeriksa nama / nim sudah terdaftar
-        for (let x = 0; x < dataMhs.length; x++){
-            // kondisi ketika salah satu ada yg kosong
-            if (!namaMhs || !nimMhs){
-                return `Harap masukan nama/nim mahasiswa nya, dan salah satu tidak boleh kosong!`;
-            }
-
-            // kondisi ketika terdapat nilai undefined dan nama/nim yang sama
-            if (dataMhs[x].nama == undefined && dataMhs[x].nim == undefined){
-                dataMhs[x] = {nama: namaMhs, nim: nimMhs};
-                return `nilai undefined berhasil ditambahkan mahasiswa baru!`;
-            }
-        }
-    }
-
-    // tambah
-    dataMhs.push({nama: namaMhs, nim: nimMhs});
-    document.write(`<br><br>${number+1}.) ${namaMhs}____ ${nimMhs}<br>`);
 
     // add nama/nim baru
     let ulang = true;
     while (ulang){
-        let agreement = confirm(`Haloo admin, ${admin[0]}\n\nApakah anda ingin Menambah Data yang Baru ?`);
+        let agreement = confirm(`Haloo admin, ${admin[0]}\n\nApakah anda ingin Menambah Data Mahasiswa yang Baru ?`);
 
         // kondisi ketika agreement(true)/oke
         if (agreement){
-            addName = prompt(`Masukan Nama/Nim Mahasiswa Baru`);
+            addName = prompt(`Masukan Nama Mahasiswa nya`);
             addNim = parseInt(prompt(`Nama : ${addName}\nHarap Masukan Nim nya`));
 
             // kondisinya
             if (dataMhs !== -1){
-                if (!addName || !addNim){
+                if (!addName || addNim){
                     alert(`Harap masukan Nama/Nim nya, Dan salah satu tidak boleh ada yang Kosong!`);
                 }
                 // mengecek nama/nim sudah terdaftar
@@ -54,10 +32,14 @@ const tambahMhs = (namaMhs, nimMhs, addName, addNim) => {
                 }
                 // tambah add baru / jika kondisi nya salah, maka jalankna kode dibawah ini
                 if (!isRegistered){
-                    number = dataMhs.length + 1;
-                    dataMhs.push({nama: addName, nim: addNim});
-                    alert(`${number}.) Nama : ${addName} Nim : ${addNim} Mahasiswa Baru Berhasil ditambahkan!`)
-                    document.write(`${number}.) ${addName}____ ${addNim}<br>`);
+                    if (isNaN(addName) || isNaN(addNim)){
+                        isRegistered = true;
+                    } else {
+                        number = dataMhs.length + 1;
+                        dataMhs.push({nama: addName, nim: addNim});
+                        alert(`${number}.) Nama : ${addName} Nim : ${addNim}\n\nMahasiswa Berhasil ditambahkan!`)
+                        document.write(`<br><br>${number}.) ${addName}____ ${addNim}`);
+                    }
                 }
             }
 
