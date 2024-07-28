@@ -39,8 +39,8 @@ const tambahDataMhs = (namaMhs, nimMhs) => {
             // kondisi ketika terdapat nama / nim yang sama
             let checkMhs = dataMhs.some(mhs => mhs.nama === namaMhs || mhs.nim === nimMhs);
 
-            // kondisi ketika nama yang kita input tidak sesuai
-            if (/\d/.test(namaMhs)){
+            // kondisi ketika nama yang kita input tidak sesuai & // kondisi ketika memasukan nama nya dengan spasi
+            if (/\d/.test(namaMhs) || !namaMhs.trim()){
                 alert(`Error.. Harap Input Nama Nya dengan Benar!`);
                 continue;
             }
