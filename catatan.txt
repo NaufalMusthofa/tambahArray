@@ -1,0 +1,79 @@
+// Masalah 1 (tambahArray)
+// Permasalahannya : tolong buatkan agar pada saat memasukan namaMhs hasil di halaman windows nya akan otomatis capitalize nama dan nim nya
+
+// Cara memecahkan masalah 1
+// Fungsi untuk mengubah string menjadi capitalize (huruf pertama setiap kata besar)
+const capitalizeWords = (str) => {
+    return str.replace(/\b\w/g, char => char.toUpperCase());
+};
+
+// Penjelasan Kode diatas masalah 1
+// 1. deklarasi Fungsi
+const capitalizeWords = (str) => {
+
+Penjelasannya : Fungsi ini diberi nama capitalizeWords dan menggunakan sintaks arrow function (=>). Fungsi ini menerima satu parameter str yang merupakan string yang akan diproses.
+
+
+// 2. Menggunakan replace dengan Regular Expression (RegEx)
+return str.replace(/\b\w/g, char => char.toUpperCase());
+
+Penjelasannya : 
+str.replace: Fungsi replace digunakan untuk mencari pola tertentu dalam string dan      menggantinya dengan nilai baru.
+/\b\w/g: Ini adalah regular expression (RegEx) yang digunakan untuk menemukan huruf pertama dari setiap kata dalam string. Mari kita pecah RegEx ini:
+\b: Ini adalah word boundary, yang berarti posisi di awal atau akhir dari sebuah kata.
+\w: Ini mewakili karakter alfanumerik (huruf atau angka).
+/g: Ini adalah flag global, yang berarti bahwa pencarian akan dilakukan di seluruh string, bukan berhenti setelah menemukan kecocokan pertama.
+
+// 3. Arrow Function untuk Transformasi Karakter
+char => char.toUpperCase()
+
+Penjelasan :
+char: Ini adalah karakter yang ditemukan oleh RegEx.
+char.toUpperCase(): Ini adalah metode yang mengubah char menjadi huruf besar.
+
+
+
+
+
+
+
+
+
+// Masalah 2
+// kondisi ketika kita memasukan nama dengan angkka, maka terdapat pesan alert error
+// cara memecahkan masalah 2
+
+// Kondisi ketika kita ingin memasukkan nama dengan angka, maka terdapat pesan alert error
+if (/\d/.test(namaMhs)) {
+    alert("Harap masukan Nama dengan benar!, Dengan string dan bukan angka!");
+    continue;
+}
+
+// 1. Regular Expression (RegEx):
+/\d/
+
+Penjelasan : 
+/ dan /: Tanda garis miring (slash) digunakan untuk menandai awal dan akhir dari sebuah RegEx.
+\d: Ini adalah simbol dalam RegEx yang mewakili digit (angka 0-9). Jadi, RegEx ini mencari digit apa pun dalam string.
+
+// 2. Metode .test():
+/\d/.test(namaMhs)
+
+Penjelasan : 
+.test(): Metode ini adalah bagian dari objek RegEx di JavaScript. Metode ini memeriksa apakah pola RegEx cocok dengan string yang diberikan.
+namaMhs: Ini adalah string yang dimasukkan pengguna sebagai nama mahasiswa.
+/\d/.test(namaMhs): Pernyataan ini mengembalikan true jika namaMhs mengandung satu atau lebih digit. Jika tidak, ia mengembalikan false.
+
+3. Kondisi if:
+if (/\d/.test(namaMhs)) {
+
+Penjelasan : 
+Kondisi ini mengecek apakah namaMhs mengandung angka. Jika namaMhs mengandung angka (/\d/.test(namaMhs) mengembalikan true), maka blok kode dalam kondisi if akan dijalankan.
+
+4. Pesan Alert dan continue:
+alert("Harap masukan Nama dengan benar!, Dengan string dan bukan angka!");
+continue;
+
+Penjelasan : 
+alert("Harap masukan Nama dengan benar!, Dengan string dan bukan angka!");: Jika kondisi if terpenuhi (yaitu, namaMhs mengandung angka), pesan alert ini akan ditampilkan kepada pengguna, meminta mereka untuk memasukkan nama yang benar tanpa angka.
+continue;: Pernyataan ini menghentikan iterasi saat ini dari loop dan melanjutkan ke iterasi berikutnya. Dalam konteks ini, itu berarti meminta pengguna untuk memasukkan nama mahasiswa lagi tanpa angka.

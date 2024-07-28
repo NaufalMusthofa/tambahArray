@@ -1,55 +1,68 @@
+/*
+TUGAS
+// Membuat data mahasiswa (nama, nim) menggunakan array + popup box
+// lalu untuk admin nya kita buat nama-nama nya Random pada saat di refresh
+*/
+
 const dataMhs = [];
-const admin = ['Muhammad Naufal Musthofa'];
+const admin = ['Muhammad Naufal Musthofa', 'Sandhika Galih', 'Dea Afrizal'];
 
-const tambahMhs = (namaMhs, nimMhs, addName, addNim) => {
+// kita buat fungsi, agar huruf pertaman dalam sebuah kata adalah huruf besar / capitalize
+const capitalizeWords = (str) => {
+    return str.replace(/\b\w/g, char => char.toUpperCase());
+}
+
+const tambahDataMhs = (namaMhs, nimMhs) => {
     let number = dataMhs.length;
-
-    // add nama/nim baru
     let ulang = true;
+
     while (ulang){
-        let agreement = confirm(`Haloo admin, ${admin[0]}\n\nApakah anda ingin Menambah Data Mahasiswa yang Baru ?`);
+        // admin Random
+        const adminRandom = Math.floor(Math.random() * admin.length);
 
-        // kondisi ketika agreement(true)/oke
+        // persetujuan
+        let agreement = confirm(`Haloo Admin, ${admin[adminRandom]} (Random Admin)\n\nApakah anda ingin Menambah Data Mahasiswa ?`);
+
+        // jika kondisi ketika agreement bernilai false
+        if (!agreement){
+            break;
+        }
+
+        // kondisi ketika agreement bernilai true
         if (agreement){
-            addName = prompt(`Masukan Nama Mahasiswa nya`);
-            addNim = parseInt(prompt(`Nama : ${addName}\nHarap Masukan Nim nya`));
+            namaMhs = prompt('Masukan Nama Mahasiswa Nya');
+            nimMhs = parseInt(prompt(`Nama : ${namaMhs}\nMasukan Nim Nya`));
 
-            // kondisinya
-            if (dataMhs !== -1){
-                if (!addName || addNim){
-                    alert(`Harap masukan Nama/Nim nya, Dan salah satu tidak boleh ada yang Kosong!`);
-                }
-                // mengecek nama/nim sudah terdaftar
-                let isRegistered = false;
-                for (let y = 0; y < dataMhs.length; y++){
-                    if (dataMhs[y].nama == addName || dataMhs[y].nim == addNim){
-                        alert(`Nama / Nim yang anda masukan Sudah Terdaftar!, Harap Cek Kembali!`);
-                        // jika kondisi true
-                        isRegistered = true;
-                        // maka diberhentikan
-                        break;
-                    }
-                }
-                // tambah add baru / jika kondisi nya salah, maka jalankna kode dibawah ini
-                if (!isRegistered){
-                    if (isNaN(addName) || isNaN(addNim)){
-                        isRegistered = true;
-                    } else {
-                        number = dataMhs.length + 1;
-                        dataMhs.push({nama: addName, nim: addNim});
-                        alert(`${number}.) Nama : ${addName} Nim : ${addNim}\n\nMahasiswa Berhasil ditambahkan!`)
-                        document.write(`<br><br>${number}.) ${addName}____ ${addNim}`);
-                    }
-                }
+            // kondisi agar merubah huruf menjadi otomatis capitalize
+            namaMhs = capitalizeWords(namaMhs);
+
+            // kondisi ketika terdapat nama / nim yang sama
+            let checkMhs = dataMhs.some(mhs => mhs.nama === namaMhs || mhs.nim === nimMhs);
+
+            // kondisi ketika nama yang kita input tidak sesuai
+            if (/\d/.test(namaMhs)){
+                alert(`Error.. Harap Input Nama Nya dengan Benar!`);
+                continue;
             }
 
-        } else {
-            // ketika kondisi nya false, maka berhenti dari perulangan nya
-            if (!agreement || !ulang){
-                break;
+            // kondisi ketika input nim tidak benar, malah memasukan string / tidak diisi
+            if (isNaN(nimMhs)){
+                alert(`Error.. Harap Input Dengan Benar!`);
+                continue; // maksudnya kita melakukan iterasi ulang, jadi nama yang kita masukan tadi diulang juga, karna tadi terdapat nim yang tidak sesuai
+            }
+
+            // cek mahasiswa nama & nim nya
+            if (checkMhs){ // jika kondisi checkMhs bernilai true / terdapat nama / nim yang sama, maka
+                alert(`Nama / Nim sudah terdaftar, Harap cek & input kembali!`);
+            } else {
+                // add mahasiswa dan tampilkan + number bertambah
+                number = number + 1;
+                dataMhs.push({nama: namaMhs, nim: nimMhs});
+                alert(`${number}.) Nama : ${namaMhs}___Nim : ${nimMhs}\n\nBerhasil di tambahkan!`);
+                document.write(`<br><br>${number}.) ${namaMhs}____ ${nimMhs}`)
             }
         }
     }
 }
-document.write(`No__Nama Mahasiswa______________Nim`);
-tambahMhs();
+document.write(`No__Nama Mahasiswa________Nim`)
+tambahDataMhs();
